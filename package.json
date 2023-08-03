@@ -1,0 +1,24 @@
+{
+  "name": "fieldzoo",
+  "private": true,
+  "scripts": {
+    "build": "nx run-many -t build",
+    "test": "nx run-many -t test",
+    "test-no-cache": "nx run-many -t test --skip-nx-cache",
+    "dev": "nx run-many -t dev",
+    "lint": "nx run-many -t lint",
+    "clean": "nx run-many -t clean && rm -rf node_modules",
+    "clear-cache": "rm -rdf node_modules/.cache/nx",
+    "format": "prettier --write \"**/*.{js,ts,tsx,md}\"",
+    "list-packages": "npx syncpack list",
+    "list-mismatches": "npx syncpack list-mismatches",
+    "fix-mismatches": "npx syncpack fix-mismatches && pnpm install"
+  },
+  "devDependencies": {
+    "nx": "16.2.1",
+    "prettier": "^2.8.7",
+    "prettier-plugin-svelte": "^2.10.1",
+    "syncpack": "^10.7.3"
+  },
+  "packageManager": "pnpm@7.15.0"
+}
