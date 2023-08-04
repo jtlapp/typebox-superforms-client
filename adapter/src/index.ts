@@ -23,18 +23,11 @@ export function superAssertSync<T extends TObject, M = any>(
 export function superAssertSync<T extends TObject, M = any>(
   ...args: any[]
 ): SuperValidateResult<T, M> {
-  if (args[0] instanceof AbstractStandardValidator) {
-    return evaluateSync(
-      undefined,
-      args[0] as AbstractStandardValidator<T>,
-      args[1] as SuperValidateOptions | undefined,
-      (validator, data) => validator.assert(data)
-    );
-  }
+  const vi = args[0] instanceof AbstractStandardValidator ? 0 : 1;
   return evaluateSync(
-    args[0] as Partial<Static<T>>,
-    args[1] as AbstractStandardValidator<T>,
-    args[2] as SuperValidateOptions | undefined,
+    vi === 0 ? undefined : (args[0] as Partial<Static<T>>),
+    args[vi] as AbstractStandardValidator<T>,
+    args[vi + 1] as SuperValidateOptions | undefined,
     (validator, data) => validator.assert(data)
   );
 }
@@ -53,18 +46,11 @@ export function superValidateSync<T extends TObject, M = any>(
 export function superValidateSync<T extends TObject, M = any>(
   ...args: any[]
 ): SuperValidateResult<T, M> {
-  if (args[0] instanceof AbstractStandardValidator) {
-    return evaluateSync(
-      undefined,
-      args[0] as AbstractStandardValidator<T>,
-      args[1] as SuperValidateOptions | undefined,
-      (validator, data) => validator.validate(data)
-    );
-  }
+  const vi = args[0] instanceof AbstractStandardValidator ? 0 : 1;
   return evaluateSync(
-    args[0] as Partial<Static<T>>,
-    args[1] as AbstractStandardValidator<T>,
-    args[2] as SuperValidateOptions | undefined,
+    vi === 0 ? undefined : (args[0] as Partial<Static<T>>),
+    args[vi] as AbstractStandardValidator<T>,
+    args[vi + 1] as SuperValidateOptions | undefined,
     (validator, data) => validator.validate(data)
   );
 }
