@@ -1,31 +1,31 @@
-import { fail } from '@sveltejs/kit';
-import { superValidate } from 'sveltekit-superforms/server';
+import { fail } from "@sveltejs/kit";
+import { superValidate } from "sveltekit-superforms/server";
 
-import { zodSchema } from '$lib/zod-schema.js';
+import { zodSchema } from "$lib/schemas.js";
 
 export const load = async () => {
-	// Server API:
-	const form = await superValidate(zodSchema);
+  // Server API:
+  const form = await superValidate(zodSchema);
 
-	// Always return { form } in load and form actions.
-	console.log('ZOD FORM', form);
-	return { form };
+  // Always return { form } in load and form actions.
+  console.log("ZOD FORM", form);
+  return { form };
 };
 
 export const actions = {
-	default: async ({ request }) => {
-		const form = await superValidate(request, zodSchema);
-		console.log('POST', form);
+  default: async ({ request }) => {
+    const form = await superValidate(request, zodSchema);
+    console.log("POST", form);
 
-		// Convenient validation check:
-		if (!form.valid) {
-			// Again, always return { form } and things will just work.
-			return fail(400, { form });
-		}
+    // Convenient validation check:
+    if (!form.valid) {
+      // Again, always return { form } and things will just work.
+      return fail(400, { form });
+    }
 
-		// TODO: Do something with the validated data
+    // TODO: Do something with the validated data
 
-		// Yep, return { form } here too
-		return { form };
-	}
+    // Yep, return { form } here too
+    return { form };
+  },
 };

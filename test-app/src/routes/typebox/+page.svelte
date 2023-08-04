@@ -4,7 +4,7 @@
 	import { toSuperformValidators } from 'typebox-superforms';
 
 	import type { PageData } from './$types';
-	import { typeboxSchema } from '$lib/typebox-schema';
+	import { typeboxSchema } from '$lib/schemas';
 	import DemoForm from '$lib/components/DemoForm.svelte';
 
 	export let data: PageData;

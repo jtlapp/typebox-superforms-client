@@ -2,7 +2,7 @@
 	import { superForm } from 'sveltekit-superforms/client';
 
 	import type { PageData } from './$types';
-	import { zodSchema } from '$lib/zod-schema';
+	import { zodSchema } from '$lib/schemas';
 	import DemoForm from '$lib/components/DemoForm.svelte';
 
 	export let data: PageData;

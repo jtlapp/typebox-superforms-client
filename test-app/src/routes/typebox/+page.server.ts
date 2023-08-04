@@ -2,7 +2,7 @@
 import { StandardValidator } from "typebox-validators/standard/index.js";
 import { superValidateSync } from "typebox-superforms";
 
-import { typeboxSchema } from "$lib/typebox-schema.js";
+import { typeboxSchema } from "$lib/schemas.js";
 
 const validator = new StandardValidator(typeboxSchema);
 

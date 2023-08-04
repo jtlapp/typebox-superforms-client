@@ -1,4 +1,4 @@
-import { Static, TObject } from "@sinclair/typebox";
+import { Optional, Static, TObject } from "@sinclair/typebox";
 import {
   AbstractStandardValidator,
   StandardValidator,
@@ -59,7 +59,10 @@ export function toSuperformValidators(schema: TObject) {
   const validators: Record<string, SuperformValidator> = {};
   for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
     validators[fieldName] = (value) => {
-      const errors = new StandardValidator(fieldSchema as any).errors(value);
+      if (value === "" && fieldSchema[Optional] == "Optional") {
+        return null;
+      }
+      const errors = new StandardValidator(fieldSchema).errors(value);
       const errorMessages = Array.from(errors).map((error) => error.message);
       return errorMessages.length ? errorMessages : null;
     };

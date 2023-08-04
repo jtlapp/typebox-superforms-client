@@ -19,6 +19,17 @@
 	</fieldset>
 
 	<fieldset>
+		<label for="nickname">Nickname</label>
+		<input
+			type="text"
+			name="nickname"
+			aria-invalid={$errors.nickname ? 'true' : undefined}
+			bind:value={$form.nickname}
+		/>
+		{#if $errors.nickname}<span class="invalid">{$errors.nickname}</span>{/if}
+	</fieldset>
+
+	<fieldset>
 		<label for="age">Age</label>
 		<input
 			type="number"
@@ -27,6 +38,17 @@
 			bind:value={$form.age}
 		/>
 		{#if $errors.age}<span class="invalid">{$errors.age}</span>{/if}
+	</fieldset>
+
+	<fieldset>
+		<label for="siblings">Siblings</label>
+		<input
+			type="number"
+			name="siblings"
+			aria-invalid={$errors.siblings ? 'true' : undefined}
+			bind:value={$form.siblings}
+		/>
+		{#if $errors.siblings}<span class="invalid">{$errors.siblings}</span>{/if}
 	</fieldset>
 
 	<fieldset>
