@@ -56,9 +56,9 @@ export function superValidateSync<T extends TObject, M = any>(
 }
 
 export function toValidatorObject(schema: TObject) {
-  const validators: Record<string, SuperformValidator> = {};
+  const validatorObject: Record<string, SuperformValidator> = {};
   for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
-    validators[fieldName] = (value) => {
+    validatorObject[fieldName] = (value) => {
       if (value === "" && fieldSchema[Optional] == "Optional") {
         return null;
       }
@@ -67,5 +67,5 @@ export function toValidatorObject(schema: TObject) {
       return errorMessages.length ? errorMessages : null;
     };
   }
-  return validators;
+  return validatorObject;
 }
