@@ -4,23 +4,13 @@ import {
   ValidationException,
   ValueError,
 } from "typebox-validators";
-import type { superValidateSync as originalSuperValidateSync } from "sveltekit-superforms/server";
 
-export interface SuperValidateOptions {
-  errors?: boolean; // Add or remove errors from output (valid status is always preserved)
-  id?: string; // Form id, for multiple forms support
-}
+import { SuperValidateOptions, SuperValidateResult } from "./types";
 
-export type SuperValidateResult<T extends TObject, M = any> = Omit<
-  ReturnType<typeof originalSuperValidateSync<any, M>>,
-  "data"
-> & {
-  data: Partial<Static<T>>;
-};
-
-export function superValidateSync<T extends TObject, M = any>(
+export function evaluateSync<T extends TObject, M = any>(
   data: Partial<Static<T>>,
   validator: AbstractStandardValidator<T>,
+  evaluate: (validator: AbstractStandardValidator<T>, data: any) => void,
   options?: SuperValidateOptions
 ): SuperValidateResult<T, M> {
   const schema = validator.schema as TObject;
@@ -37,7 +27,7 @@ export function superValidateSync<T extends TObject, M = any>(
   }
 
   try {
-    validator.validate(data);
+    evaluate(validator, data);
   } catch (e) {
     if (e instanceof ValidationException) {
       errored = true;
