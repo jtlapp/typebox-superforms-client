@@ -1,4 +1,4 @@
-import type { Static, TObject } from "@sinclair/typebox";
+import { Kind, type Static, type TObject } from "@sinclair/typebox";
 import {
   type AbstractStandardValidator,
   ValidationException,
@@ -18,32 +18,11 @@ export function evaluateSync<T extends TObject, M = any>(
   let valid = true;
 
   if (data === undefined) {
-    // Initialize data with default values
-
     data = {};
-    for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
-      if (fieldSchema.default !== undefined) {
-        data[fieldName as keyof Static<T>] = fieldSchema.default;
-      }
-    }
-
-    // Only valid when all fields are optional.
-
+    assignDefaults(schema, data);
     valid = validator.test(data);
   } else {
-    // Initialize missing data with default values
-
-    for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
-      const key = fieldName as keyof Static<T>;
-      if (data[key] === undefined) {
-        if (fieldSchema.default !== undefined) {
-          data[key] = fieldSchema.default;
-        }
-      }
-    }
-
-    // Validate the provided data
-
+    assignDefaults(schema, data);
     if (options?.errors) {
       try {
         evaluateData(validator, data);
@@ -62,12 +41,22 @@ export function evaluateSync<T extends TObject, M = any>(
 
   return {
     valid,
-    posted: true,
+    posted: false,
     data,
     errors,
     constraints: {},
     id: options?.id,
   };
+}
+
+function assignDefaults<T extends TObject>(schema: T, obj: Partial<Static<T>>) {
+  for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
+    const key = fieldName as keyof Static<T>;
+    if (obj[key] === undefined) {
+      obj[key] =
+        fieldSchema.default ?? (fieldSchema[Kind] === "Boolean" ? false : "");
+    }
+  }
 }
 
 function addErrorMessage(

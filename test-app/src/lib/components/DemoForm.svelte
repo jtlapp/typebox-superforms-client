@@ -21,7 +21,7 @@
 	<fieldset>
 		<label for="age">Age</label>
 		<input
-			type="text"
+			type="number"
 			name="age"
 			aria-invalid={$errors.age ? 'true' : undefined}
 			bind:value={$form.age}
@@ -38,6 +38,17 @@
 			bind:value={$form.email}
 		/>
 		{#if $errors.email}<span class="invalid">{$errors.email}</span>{/if}
+	</fieldset>
+
+	<fieldset>
+		<label for="agree">Agree?</label>
+		<input
+			type="checkbox"
+			name="agree"
+			aria-invalid={$errors.agree ? 'true' : undefined}
+			bind:checked={$form.agree}
+		/>
+		{#if $errors.agree}<span class="invalid">{$errors.agree}</span>{/if}
 	</fieldset>
 
 	<div><button>Submit</button></div>
