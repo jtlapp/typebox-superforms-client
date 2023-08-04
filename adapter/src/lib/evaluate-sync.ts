@@ -8,37 +8,56 @@ import {
 import { SuperValidateOptions, SuperValidateResult } from "./types";
 
 export function evaluateSync<T extends TObject, M = any>(
-  data: Partial<Static<T>>,
+  data: Partial<Static<T>> | undefined,
   validator: AbstractStandardValidator<T>,
-  evaluateData: (validator: AbstractStandardValidator<T>, data: any) => void,
-  options?: SuperValidateOptions
+  options: SuperValidateOptions | undefined,
+  evaluateData: (validator: AbstractStandardValidator<T>, data: any) => void
 ): SuperValidateResult<T, M> {
   const schema = validator.schema as TObject;
   const errors: Record<string, string | string[]> = {};
   let valid = true;
 
-  for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
-    const key = fieldName as keyof Static<T>;
-    if (data[key] === undefined) {
+  if (data === undefined) {
+    // Initialize data with default values
+
+    data = {};
+    for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
       if (fieldSchema.defaultValue !== undefined) {
-        data[key] = fieldSchema.defaultValue;
+        data[fieldName as keyof Static<T>] = fieldSchema.defaultValue;
       }
     }
-  }
 
-  if (options?.errors) {
-    try {
-      evaluateData(validator, data);
-    } catch (e) {
-      if (e instanceof ValidationException) {
-        valid = false;
-        for (const detail of e.details) {
-          addErrorMessage(errors, detail);
-        }
-      } else throw e;
-    }
-  } else {
+    // Only valid when all fields are optional.
+
     valid = validator.test(data);
+  } else {
+    // Initialize missing data with default values
+
+    for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
+      const key = fieldName as keyof Static<T>;
+      if (data[key] === undefined) {
+        if (fieldSchema.defaultValue !== undefined) {
+          data[key] = fieldSchema.defaultValue;
+        }
+      }
+    }
+
+    // Validate the provided data
+
+    if (options?.errors) {
+      try {
+        evaluateData(validator, data);
+      } catch (e) {
+        if (e instanceof ValidationException) {
+          valid = false;
+          for (const detail of e.details) {
+            addErrorMessage(errors, detail);
+          }
+        } else throw e;
+      }
+    } else {
+      valid = validator.test(data);
+    }
   }
 
   return {

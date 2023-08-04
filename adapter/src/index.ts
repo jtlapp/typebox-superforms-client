@@ -1,6 +1,6 @@
 import { Static, TObject } from "@sinclair/typebox";
 import {
-  type AbstractStandardValidator,
+  AbstractStandardValidator,
   StandardValidator,
 } from "typebox-validators";
 
@@ -10,28 +10,62 @@ import { evaluateSync } from "./lib/evaluate-sync";
 type SuperformValidator = (value: any) => string | string[] | null;
 
 export function superAssertSync<T extends TObject, M = any>(
+  validator: AbstractStandardValidator<T>,
+  options?: SuperValidateOptions
+): SuperValidateResult<T, M>;
+
+export function superAssertSync<T extends TObject, M = any>(
   data: Partial<Static<T>>,
   validator: AbstractStandardValidator<T>,
   options?: SuperValidateOptions
+): SuperValidateResult<T, M>;
+
+export function superAssertSync<T extends TObject, M = any>(
+  ...args: any[]
 ): SuperValidateResult<T, M> {
+  if (args[0] instanceof AbstractStandardValidator) {
+    return evaluateSync(
+      undefined,
+      args[0] as AbstractStandardValidator<T>,
+      args[1] as SuperValidateOptions | undefined,
+      (validator, data) => validator.assert(data)
+    );
+  }
   return evaluateSync(
-    data,
-    validator,
-    (validator, data) => validator.assert(data),
-    options
+    args[0] as Partial<Static<T>>,
+    args[1] as AbstractStandardValidator<T>,
+    args[2] as SuperValidateOptions | undefined,
+    (validator, data) => validator.assert(data)
   );
 }
+
+export function superValidateSync<T extends TObject, M = any>(
+  validator: AbstractStandardValidator<T>,
+  options?: SuperValidateOptions
+): SuperValidateResult<T, M>;
 
 export function superValidateSync<T extends TObject, M = any>(
   data: Partial<Static<T>>,
   validator: AbstractStandardValidator<T>,
   options?: SuperValidateOptions
+): SuperValidateResult<T, M>;
+
+export function superValidateSync<T extends TObject, M = any>(
+  ...args: any[]
 ): SuperValidateResult<T, M> {
+  if (args[0] instanceof AbstractStandardValidator) {
+    return evaluateSync(
+      undefined,
+      args[0] as AbstractStandardValidator<T>,
+      args[1] as SuperValidateOptions | undefined,
+      (validator, data) => validator.validate(data)
+    );
+  }
   return evaluateSync(
-    data,
-    validator,
-    (validator, data) => validator.validate(data),
-    options
+    args[0] as Partial<Static<T>>,
+    args[1] as AbstractStandardValidator<T>,
+    args[2] as SuperValidateOptions | undefined,
+    (validator, data) => validator.validate(data)
   );
 }
 

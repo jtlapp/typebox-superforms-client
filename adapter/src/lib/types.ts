@@ -2,8 +2,15 @@ import { Static, TObject } from "@sinclair/typebox";
 import type { superValidateSync as originalSuperValidateSync } from "sveltekit-superforms/server";
 
 export interface SuperValidateOptions {
-  errors?: boolean; // Add or remove errors from output (valid status is always preserved)
-  id?: string; // Form id, for multiple forms support
+  /**
+   * Whether to report error messages. Doesn't affect value of returned
+   * `valid` property. Defaults to false.
+   */
+  errors?: boolean;
+  /**
+   * Unique ID of the form, needed when there are multiple forms.
+   */
+  id?: string;
 }
 
 export type SuperValidateResult<T extends TObject, M = any> = Omit<
