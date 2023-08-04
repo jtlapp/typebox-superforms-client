@@ -1,9 +1,8 @@
 {
-  "extends": "tsconfig/tsconfig.base.json",
+  "extends": ["tsconfig/tsconfig.base.json"],
   "compilerOptions": {
-    "lib": ["ES6"],
-    "module": "ESNext",
-    "outDir": "./dist/esm",
+    "lib": ["esnext", "DOM", "DOM.Iterable"],
+    "outDir": "./dist",
     "rootDir": "./src"
   },
   "include": ["*.d.ts", "**/*.ts", "**/*.tsx"],

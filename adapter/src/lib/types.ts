@@ -1,6 +1,8 @@
 import { Static, TObject } from "@sinclair/typebox";
 import type { superValidateSync as originalSuperValidateSync } from "sveltekit-superforms/server";
 
+export type SourceData<T extends TObject> = Request | Partial<Static<T>>;
+
 export interface SuperValidateOptions {
   /**
    * Whether to report error messages. Doesn't affect value of returned

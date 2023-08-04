@@ -19,19 +19,13 @@
   "license": "MIT",
   "type": "module",
   "source": "src/index.ts",
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.js",
   "files": [
     "dist/**"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    }
-  },
   "scripts": {
-    "build": "rm -rdf dist && tsc && tsc -p tsconfig.cjs.json && pnpm write-packages",
-    "write-packages": "echo '{\"type\":\"module\"}' > dist/esm/package.json && echo '{\"type\":\"commonjs\"}' > dist/cjs/package.json",
+    "build": "rm -rdf dist && tsc",
     "clean": "rm -rf node_modules && rm -rf dist",
     "dev": "tsc -w",
     "lint": "TIMING=1 eslint \"src/**/*.ts*\"",
