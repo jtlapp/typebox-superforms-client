@@ -55,7 +55,7 @@ export function superValidateSync<T extends TObject, M = any>(
   );
 }
 
-export function toSuperformValidators(schema: TObject) {
+export function toValidatorObject(schema: TObject) {
   const validators: Record<string, SuperformValidator> = {};
   for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
     validators[fieldName] = (value) => {

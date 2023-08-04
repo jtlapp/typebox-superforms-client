@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { superForm } from 'sveltekit-superforms/client';
 
-	import { toSuperformValidators } from 'typebox-superforms';
+	import { toValidatorObject } from 'typebox-superforms';
 
 	import type { PageData } from './$types';
 	import { typeboxSchema } from '$lib/schemas';
@@ -15,7 +15,7 @@
 		enhance: enhance1
 	} = superForm(data.form, {
 		id: 'typebox-client-side',
-		validators: toSuperformValidators(typeboxSchema)
+		validators: toValidatorObject(typeboxSchema)
 	});
 </script>
 
