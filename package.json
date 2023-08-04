@@ -1,5 +1,5 @@
 {
-  "name": "fieldzoo",
+  "name": "typebox-superforms-monorepo",
   "private": true,
   "scripts": {
     "build": "nx run-many -t build",
