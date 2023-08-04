@@ -4,7 +4,7 @@ import { StandardValidator } from 'typebox-validators/standard/index.js';
 import { superValidateSync } from 'typebox-superforms';
 
 const typeboxSchema = Type.Object({
-	name: Type.String({ minLength: 2, defaultValue: 'Jane' }),
+	name: Type.String({ minLength: 2, default: 'Jane' }),
 	age: Type.Number({ minimum: 13 }),
 	email: Type.String({
 		pattern: '^[a-z]+@[a-z]+[.][a-z]+$',

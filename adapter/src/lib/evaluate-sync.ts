@@ -22,8 +22,8 @@ export function evaluateSync<T extends TObject, M = any>(
 
     data = {};
     for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
-      if (fieldSchema.defaultValue !== undefined) {
-        data[fieldName as keyof Static<T>] = fieldSchema.defaultValue;
+      if (fieldSchema.default !== undefined) {
+        data[fieldName as keyof Static<T>] = fieldSchema.default;
       }
     }
 
@@ -36,8 +36,8 @@ export function evaluateSync<T extends TObject, M = any>(
     for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
       const key = fieldName as keyof Static<T>;
       if (data[key] === undefined) {
-        if (fieldSchema.defaultValue !== undefined) {
-          data[key] = fieldSchema.defaultValue;
+        if (fieldSchema.default !== undefined) {
+          data[key] = fieldSchema.default;
         }
       }
     }
