@@ -1,21 +1,28 @@
 import type { Static, TObject } from "@sinclair/typebox";
 import {
-  ValidationException,
   type AbstractStandardValidator,
+  ValidationException,
   ValueError,
 } from "typebox-validators";
-import type { superValidateSync as superformsSuperValidateSync } from "sveltekit-superforms/server";
+import type { superValidateSync as originalSuperValidateSync } from "sveltekit-superforms/server";
 
 export interface SuperValidateOptions {
   errors?: boolean; // Add or remove errors from output (valid status is always preserved)
   id?: string; // Form id, for multiple forms support
 }
 
+export type SuperValidateResult<T extends TObject, M = any> = Omit<
+  ReturnType<typeof originalSuperValidateSync<any, M>>,
+  "data"
+> & {
+  data: Partial<Static<T>>;
+};
+
 export function superValidateSync<T extends TObject, M = any>(
   data: Partial<Static<T>>,
   validator: AbstractStandardValidator<T>,
   options?: SuperValidateOptions
-): ReturnType<typeof superformsSuperValidateSync<any, M>> {
+): SuperValidateResult<T, M> {
   const schema = validator.schema as TObject;
   const errors: Record<string, string | string[]> = {};
   let errored = false;
