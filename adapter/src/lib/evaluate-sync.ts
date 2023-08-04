@@ -10,12 +10,12 @@ import { SuperValidateOptions, SuperValidateResult } from "./types";
 export function evaluateSync<T extends TObject, M = any>(
   data: Partial<Static<T>>,
   validator: AbstractStandardValidator<T>,
-  evaluate: (validator: AbstractStandardValidator<T>, data: any) => void,
+  evaluateData: (validator: AbstractStandardValidator<T>, data: any) => void,
   options?: SuperValidateOptions
 ): SuperValidateResult<T, M> {
   const schema = validator.schema as TObject;
   const errors: Record<string, string | string[]> = {};
-  let errored = false;
+  let valid = true;
 
   for (const [fieldName, fieldSchema] of Object.entries(schema.properties)) {
     const key = fieldName as keyof Static<T>;
@@ -26,21 +26,23 @@ export function evaluateSync<T extends TObject, M = any>(
     }
   }
 
-  try {
-    evaluate(validator, data);
-  } catch (e) {
-    if (e instanceof ValidationException) {
-      errored = true;
-      if (!options?.errors) {
+  if (options?.errors) {
+    try {
+      evaluateData(validator, data);
+    } catch (e) {
+      if (e instanceof ValidationException) {
+        valid = false;
         for (const detail of e.details) {
           addErrorMessage(errors, detail);
         }
-      }
-    } else throw e;
+      } else throw e;
+    }
+  } else {
+    valid = validator.test(data);
   }
 
   return {
-    valid: !errored,
+    valid,
     posted: true,
     data,
     errors,
