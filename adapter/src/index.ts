@@ -1,2 +1,2 @@
-// export * from "lib/source.ts";
-export const dummy = "delete this";
+export * from "./lib/super-validate-sync.js";
+export * from "./lib/to-superform-validators.js";

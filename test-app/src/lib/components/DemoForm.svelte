@@ -19,6 +19,17 @@
 	</fieldset>
 
 	<fieldset>
+		<label for="age">Age</label>
+		<input
+			type="text"
+			name="age"
+			aria-invalid={$errors.age ? 'true' : undefined}
+			bind:value={$form.age}
+		/>
+		{#if $errors.age}<span class="invalid">{$errors.age}</span>{/if}
+	</fieldset>
+
+	<fieldset>
 		<label for="email">E-mail</label>
 		<input
 			type="email"

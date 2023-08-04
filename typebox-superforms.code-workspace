@@ -1,21 +1,21 @@
 {
   "folders": [
     {
-      "name": "typebox-superforms",
+      "name": "root",
       "path": "."
     },
     {
-      "name": "test-app",
-      "path": "test-app"
+      "name": "adapter",
+      "path": "adapter"
     },
     {
       "name": "config",
       "path": "config"
     },
     {
-      "name": "adapter",
-      "path": "adapter"
-    },
+      "name": "test-app",
+      "path": "test-app"
+    }
   ],
   "settings": {
     "workbench.settings.openDefaultSettings": true

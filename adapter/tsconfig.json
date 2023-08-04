@@ -1,9 +1,9 @@
 {
   "extends": "tsconfig/tsconfig.base.json",
   "compilerOptions": {
-    "lib": ["ES2019"],
+    "lib": ["ES6"],
     "module": "ESNext",
-    "outDir": "./dist",
+    "outDir": "./dist/esm",
     "rootDir": "./src"
   },
   "include": ["*.d.ts", "**/*.ts", "**/*.tsx"],
