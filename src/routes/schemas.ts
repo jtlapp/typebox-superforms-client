@@ -2,7 +2,7 @@ import { Type } from "@sinclair/typebox";
 import { z } from "zod";
 
 export const typeboxSchema = Type.Object({
-  name: Type.String({ minLength: 2, default: "Jane" }),
+  name: Type.String({ minLength: 2 }),
   nickname: Type.Optional(Type.String({ minLength: 2 })),
   age: Type.Number({ minimum: 13, errorMessage: "Must be a number >= 13" }),
   siblings: Type.Optional(Type.Integer({ minimum: 0 })),
@@ -11,6 +11,23 @@ export const typeboxSchema = Type.Object({
     minLength: 10,
   }),
   agree: Type.Boolean(),
+});
+
+export const typeboxSchemaWithDefaults = Type.Object({
+  name: Type.String({ minLength: 2, default: "Jane" }),
+  nickname: Type.Optional(Type.String({ minLength: 2, default: "Janey" })),
+  age: Type.Number({
+    minimum: 13,
+    default: 50,
+    errorMessage: "Must be a number >= 13",
+  }),
+  siblings: Type.Optional(Type.Integer({ minimum: 0, default: 0 })),
+  email: Type.String({
+    pattern: "^[a-z]+@[a-z]+[.][a-z]+$",
+    minLength: 10,
+    default: "username@example.com",
+  }),
+  agree: Type.Boolean({ default: true }),
 });
 
 export const zodSchema = z.object({

@@ -15,7 +15,7 @@ export const load = async () => {
 export const actions = {
   default: async ({ request }) => {
     const form = await superValidate(request, zodSchema);
-    console.log("POST", form);
+    console.log("POSTED ACTION", form);
 
     // Convenient validation check:
     if (!form.valid) {
