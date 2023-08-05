@@ -20,4 +20,4 @@
 </script>
 
 <h1>TypeBox: Client-Side Validation</h1>
-<TestForm form={form1} errors={errors1} enhance={enhance1} />
+<TestForm id="client-side" form={form1} errors={errors1} enhance={enhance1} />

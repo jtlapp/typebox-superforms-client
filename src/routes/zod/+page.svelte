@@ -24,7 +24,7 @@
 </script>
 
 <h1>Zod: Client-Side Validation</h1>
-<TestForm form={form1} errors={errors1} enhance={enhance1} />
+<TestForm id="client-side" form={form1} errors={errors1} enhance={enhance1} />
 
 <h1>Zod: Server-Side Validation</h1>
-<TestForm form={form2} errors={errors2} enhance={enhance2} />
+<TestForm id="server-side" form={form2} errors={errors2} enhance={enhance2} />

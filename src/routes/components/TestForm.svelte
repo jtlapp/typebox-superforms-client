@@ -1,12 +1,13 @@
 <script lang="ts">
   import type { superForm } from "sveltekit-superforms/client";
 
+  export let id: string;
   export let form: ReturnType<typeof superForm>["form"];
   export let errors: ReturnType<typeof superForm>["errors"];
   export let enhance: ReturnType<typeof superForm>["enhance"];
 </script>
 
-<form method="POST" use:enhance>
+<form {id} method="POST" use:enhance>
   <fieldset>
     <label for="name">Name</label>
     <input
@@ -15,8 +16,7 @@
       aria-invalid={$errors.name ? "true" : undefined}
       bind:value={$form.name}
     />
-    {#if $errors.name}<span id="name_errors" class="invalid"
-        >{$errors.name}</span
+    {#if $errors.name}<span class="name_errors invalid">{$errors.name}</span
       >{/if}
   </fieldset>
 
@@ -28,7 +28,7 @@
       aria-invalid={$errors.nickname ? "true" : undefined}
       bind:value={$form.nickname}
     />
-    {#if $errors.nickname}<span id="nickname_errors" class="invalid"
+    {#if $errors.nickname}<span class="nickname_errors invalid"
         >{$errors.nickname}</span
       >{/if}
   </fieldset>
@@ -41,8 +41,7 @@
       aria-invalid={$errors.age ? "true" : undefined}
       bind:value={$form.age}
     />
-    {#if $errors.age}<span id="age_errors" class="invalid">{$errors.age}</span
-      >{/if}
+    {#if $errors.age}<span class="age_errors invalid">{$errors.age}</span>{/if}
   </fieldset>
 
   <fieldset>
@@ -53,7 +52,7 @@
       aria-invalid={$errors.siblings ? "true" : undefined}
       bind:value={$form.siblings}
     />
-    {#if $errors.siblings}<span id="siblings_errors" class="invalid"
+    {#if $errors.siblings}<span class="siblings_errors invalid"
         >{$errors.siblings}</span
       >{/if}
   </fieldset>
@@ -66,8 +65,7 @@
       aria-invalid={$errors.email ? "true" : undefined}
       bind:value={$form.email}
     />
-    {#if $errors.email}<span id="email_errors" class="invalid"
-        >{$errors.email}</span
+    {#if $errors.email}<span class="email_errors invalid">{$errors.email}</span
       >{/if}
   </fieldset>
 
@@ -79,8 +77,7 @@
       aria-invalid={$errors.agree ? "true" : undefined}
       bind:checked={$form.agree}
     />
-    {#if $errors.agree}<span id="agree_errors" class="invalid"
-        >{$errors.agree}</span
+    {#if $errors.agree}<span class="agree_errors invalid">{$errors.agree}</span
       >{/if}
   </fieldset>
 
