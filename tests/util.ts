@@ -14,13 +14,15 @@ export interface ExpectedForm {
   agree: ExpectedInput;
 }
 
+export async function waitForUpdate(page: Page) {
+  await expect(page.locator("body")).toContainText("updated");
+}
+
 export async function checkForm(
   page: Page,
   formID: string,
   form: ExpectedForm
 ) {
-  await expect(page.locator("body")).toContainText("updated");
-
   await checkField(page, formID, form, "name");
   await checkField(page, formID, form, "nickname");
   await checkField(page, formID, form, "age");
