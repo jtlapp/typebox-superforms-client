@@ -45,7 +45,7 @@ async function checkField(
     );
   } else {
     expect(await page.inputValue(`${formID} input[name=${field}]`)).toEqual(
-      value
+      value.toString()
     );
   }
 
@@ -57,5 +57,29 @@ async function checkField(
         error
       );
     }
+  }
+}
+
+export async function setInputs(
+  page: Page,
+  formID: string,
+  form: ExpectedForm
+) {
+  const setInput = async (field: keyof ExpectedForm) => {
+    await page.fill(
+      `${formID} input[name=${field}]`,
+      form[field].value.toString()
+    );
+  };
+
+  await setInput("name");
+  await setInput("nickname");
+  await setInput("age");
+  await setInput("siblings");
+  await setInput("email");
+  if (form.agree.value) {
+    await page.check(`${formID} input[name=agree]`);
+  } else {
+    await page.uncheck(`${formID} input[name=agree]`);
   }
 }
