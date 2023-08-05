@@ -57,8 +57,8 @@ devDependencies:
     specifier: ^2.4.1
     version: 2.6.1
   typebox-validators:
-    specifier: 0.3.1
-    version: 0.3.1
+    specifier: 0.3.2
+    version: 0.3.2
   typescript:
     specifier: ^5.0.0
     version: 5.1.6
@@ -2228,8 +2228,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /typebox-validators@0.3.1:
-    resolution: {integrity: sha512-jgo4mGcV7DjZEcHxz7p7uA9f+Ua9MzbkXF5jEk91I2t0U//KkPN0rL/n45DRJDaIKwJYDCpnaJx9JnrkK8/H7A==}
+  /typebox-validators@0.3.2:
+    resolution: {integrity: sha512-0QlfWRCnSBA9kK8Pt06RP1C+yYVFHrcJ6UuAISZ0rAP8alMeRkbqr9q5Evk0/zMr5Voi7lHxrwp44vCb13Lf8Q==}
     dependencies:
       '@sinclair/typebox': 0.30.2
     dev: true
