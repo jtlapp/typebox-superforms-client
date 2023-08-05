@@ -3,7 +3,7 @@
 
   import { toValidatorObject } from "$lib/index.js";
 
-  import type { PageData } from "../typebox/$types.js";
+  import type { PageData } from "./$types.js";
   import { typeboxSchema } from "../schemas.js";
   import TestForm from "$components/TestForm.svelte";
 
@@ -17,6 +17,7 @@
     enhance: enhance1,
   } = superForm(data.form, {
     id: "typebox-client-side",
+    SPA: true, // disables posting
     validators: toValidatorObject(typeboxSchema),
     onUpdated: () => {
       updated = true;
