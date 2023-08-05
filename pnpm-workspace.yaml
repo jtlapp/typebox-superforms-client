@@ -1,4 +1,0 @@
-packages:
-  - "adapter"
-  - "config/*"
-  - "test-app"

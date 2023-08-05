@@ -1,30 +1,11 @@
-# dependencies
-node_modules
-.pnp
-.pnp.js
-
-# testing
-coverage
-
-# caches
-.next/
-out/
-build
-dist
-.swc/
-
-# misc
 .DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# env files
-.env*
-
-# turbo
-.turbo
+node_modules
+/build
+/dist
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
