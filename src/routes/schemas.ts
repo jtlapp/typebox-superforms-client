@@ -22,5 +22,5 @@ export const zodSchema = z.object({
     .default("" as unknown as number),
   siblings: z.optional(z.number().int().min(0)),
   email: z.string().min(10).email(),
-  agree: z.boolean().default(true),
+  agree: z.boolean(),
 });
