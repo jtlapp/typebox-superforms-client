@@ -3,7 +3,7 @@
 
   import type { PageData } from "./$types.js";
   import { zodSchema } from "../schemas.js";
-  import DemoForm from "../DemoForm.svelte";
+  import TestForm from "$components/TestForm.svelte";
 
   export let data: PageData;
 
@@ -24,7 +24,7 @@
 </script>
 
 <h1>Zod: Client-Side Validation</h1>
-<DemoForm form={form1} errors={errors1} enhance={enhance1} />
+<TestForm form={form1} errors={errors1} enhance={enhance1} />
 
 <h1>Zod: Server-Side Validation</h1>
-<DemoForm form={form2} errors={errors2} enhance={enhance2} />
+<TestForm form={form2} errors={errors2} enhance={enhance2} />

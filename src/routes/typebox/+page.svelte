@@ -5,7 +5,7 @@
 
   import type { PageData } from "./$types.js";
   import { typeboxSchema } from "../schemas.js";
-  import DemoForm from "../DemoForm.svelte";
+  import TestForm from "$components/TestForm.svelte";
 
   export let data: PageData;
 
@@ -20,4 +20,4 @@
 </script>
 
 <h1>TypeBox: Client-Side Validation</h1>
-<DemoForm form={form1} errors={errors1} enhance={enhance1} />
+<TestForm form={form1} errors={errors1} enhance={enhance1} />
