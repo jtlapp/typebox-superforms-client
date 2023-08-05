@@ -23,6 +23,8 @@
   } = superForm(data.form, { id: "zod-server-side" });
 </script>
 
+<p>This page exists for reverse engineering purposes only.</p>
+
 <h1>Zod: Client-Side Validation</h1>
 <TestForm id="client-side" form={form1} errors={errors1} enhance={enhance1} />
 
