@@ -12,21 +12,3 @@ export const load = async () => {
   console.log("TYPEBOX FORM", form);
   return { form };
 };
-
-// export const actions = {
-// 	default: async ({ request }) => {
-// 		const form = superValidateSync(request, typeboxSchema);
-// 		console.log('POST', form);
-
-// 		// Convenient validation check:
-// 		if (!form.valid) {
-// 			// Again, always return { form } and things will just work.
-// 			return fail(400, { form });
-// 		}
-
-// 		// TODO: Do something with the validated data
-
-// 		// Yep, return { form } here too
-// 		return { form };
-// 	}
-// };

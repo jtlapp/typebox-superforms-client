@@ -49,7 +49,9 @@ test.describe("superValidateSync", () => {
 
       // Verify submitting initial form (no errors).
 
-      // TBD
+      await page.click("#client-side button");
+      await waitForUpdate(page);
+      await checkForm(page, "#client-side", initialForm);
     });
 
     test("initial form behavior (w/out defaults)", async ({ page }) => {
