@@ -2,9 +2,11 @@
 
 Adapters for using TypeBox with SvelteKit Superforms
 
-**UNDER CONSTRUCTION**
+**DEVELOPMENT NOW ON HOLD**
 
-----
+I'm questioning the suitability of using Superforms with TypeBox.
+
+---
 
 # create-svelte
 

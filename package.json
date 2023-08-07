@@ -16,6 +16,9 @@
     "adapter"
   ],
   "license": "MIT",
+  "svelte": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && npm run package",
@@ -72,7 +75,7 @@
     "vitest": "^0.32.2",
     "zod": "^3.21.4"
   },
-  "svelte": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "type": "module"
+  "dependencies": {
+    "devalue": "^4.3.2"
+  }
 }

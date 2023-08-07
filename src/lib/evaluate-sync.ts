@@ -5,7 +5,10 @@ import {
   type ValueError,
 } from "typebox-validators";
 
-import type { SuperValidateOptions, SuperValidateResult } from "./types.js";
+import type {
+  SuperValidateOptions,
+  SuperValidateResult,
+} from "./public-types.js";
 
 export function evaluateSync<T extends TObject, M = any>(
   data: Partial<Static<T>> | undefined,

@@ -4,7 +4,10 @@ import {
   StandardValidator,
 } from "typebox-validators";
 
-import type { SuperValidateOptions, SuperValidateResult } from "./types.js";
+import type {
+  SuperValidateOptions,
+  SuperValidateResult,
+} from "./public-types.js";
 import { evaluateSync } from "./evaluate-sync.js";
 
 type SuperformValidator = (value: any) => string | string[] | null;
