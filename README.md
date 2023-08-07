@@ -6,7 +6,7 @@ SvelteKit superforms using TypeBox schemas, hitting API endpoints
 
 ## Introduction
 
-[SvelteKit Superforms](https://superforms.rocks/) has made forms for [SvelteKit
+[SvelteKit Superforms](https://superforms.rocks/) has made forms for [SvelteKit]
 (https://kit.svelte.dev/) super easy and super user friendly, but it is based on [Zod](https://zod.dev/) schemas. When people choose [TypeBox](https://github.com/sinclairzx81/typebox) over Zod, it is because they are prioritizing [backend performance](https://moltar.github.io/typescript-runtime-type-benchmarks/). The present library is for those who want all the client-side benefits of Superforms while still maximizing backend performance. Rather than sending form data to the server to parse as a function of the schema, this library parses the form data on the client and submits the data as JSON to a backend endpoint.
 
 ---
