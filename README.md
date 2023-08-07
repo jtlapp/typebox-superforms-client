@@ -1,6 +1,6 @@
 # TypeBox Superforms
 
-SvelteKit superforms for TypeBox schemas hitting API endpoints
+SvelteKit superforms using TypeBox schemas, hitting API endpoints
 
 **UNDER DEVELOPMENT**
 

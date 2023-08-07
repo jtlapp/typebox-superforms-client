@@ -1,7 +1,7 @@
 {
   "name": "typebox-for-superforms",
   "version": "0.0.1",
-  "description": "Adapters for using TypeBox with SvelteKit Superforms",
+  "description": "SvelteKit superforms using TypeBox schemas, hitting API endpoints",
   "author": "Joseph T. Lapp <arachnojoe@gmail.com>",
   "repository": {
     "type": "git",
@@ -12,8 +12,7 @@
     "validation",
     "forms",
     "sveltekit",
-    "superforms",
-    "adapter"
+    "superforms"
   ],
   "license": "MIT",
   "svelte": "./dist/index.js",
