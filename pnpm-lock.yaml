@@ -5,17 +5,17 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  devalue:
-    specifier: ^4.3.2
-    version: 4.3.2
+  typebox-form-parser:
+    specifier: ^0.1.1
+    version: 0.1.1(@sinclair/typebox@0.30.4)
 
 devDependencies:
   '@playwright/test':
     specifier: ^1.28.1
     version: 1.36.2
   '@sinclair/typebox':
-    specifier: ^0.30.2
-    version: 0.30.2
+    specifier: ^0.30.4
+    version: 0.30.4
   '@sveltejs/adapter-auto':
     specifier: ^2.0.0
     version: 2.1.0(@sveltejs/kit@1.22.4)
@@ -428,9 +428,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@sinclair/typebox@0.30.2:
-    resolution: {integrity: sha512-PNEojrBZGQL+llfGfGn6EZNHUXxyvA3LeySMUxMk+i+GrtuT1nBBP3BPzzgJKW9b7lUMa9KxHVx+CIPEy5bL5w==}
-    dev: true
+  /@sinclair/typebox@0.30.4:
+    resolution: {integrity: sha512-wFuuDR+O1OAE2GL0q68h1Ty00RE6Ihcixr55A6TU5RCvOUHnwJw9LGuDVg9NxDiAp7m/YJpa+UaOuLAz0ziyOQ==}
 
   /@sveltejs/adapter-auto@2.1.0(@sveltejs/kit@1.22.4):
     resolution: {integrity: sha512-o2pZCfATFtA/Gw/BB0Xm7k4EYaekXxaPGER3xGSY3FvzFJGTlJlZjBseaXwYSM94lZ0HniOjTokN3cWaLX6fow==}
@@ -988,6 +987,7 @@ packages:
 
   /devalue@4.3.2:
     resolution: {integrity: sha512-KqFl6pOgOW+Y6wJgu80rHpo2/3H07vr8ntR9rkkFIRETewbf5GaYYcakYfiKz89K+sLsuPkQIZaXDMjUObZwWg==}
+    dev: true
 
   /diff-sequences@29.4.3:
     resolution: {integrity: sha512-ofrBgwpPhCD85kMKtE9RYFFq6OC1A89oW2vvgWZNCwxrUpRUILopY7lsYyMDSjc8g6U6aiO0Qubg6r4Wgt5ZnA==}
@@ -2232,10 +2232,18 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
+  /typebox-form-parser@0.1.1(@sinclair/typebox@0.30.4):
+    resolution: {integrity: sha512-3OjGjCxKChm8yTA3FHVkuXdOVsAXs2nPKW6zZQIX9ut61W7i8+PM6tn0vKjnAAUIK5U1KoSMj0041C4eKULucA==}
+    peerDependencies:
+      '@sinclair/typebox': ^0.30.4
+    dependencies:
+      '@sinclair/typebox': 0.30.4
+    dev: false
+
   /typebox-validators@0.3.2:
     resolution: {integrity: sha512-0QlfWRCnSBA9kK8Pt06RP1C+yYVFHrcJ6UuAISZ0rAP8alMeRkbqr9q5Evk0/zMr5Voi7lHxrwp44vCb13Lf8Q==}
     dependencies:
-      '@sinclair/typebox': 0.30.2
+      '@sinclair/typebox': 0.30.4
     dev: true
 
   /typescript@5.1.6:

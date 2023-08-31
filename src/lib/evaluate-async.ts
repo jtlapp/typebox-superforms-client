@@ -2,19 +2,18 @@
 
 import type { Static, TObject } from "@sinclair/typebox";
 import {
-  type AbstractStandardValidator,
-  ValidationException,
-  type ValueError,
-} from "typebox-validators";
+  type SchemaInfo,
+  getSchemaInfo,
+  parseFormFields,
+} from "typebox-form-parser";
+import type { AbstractStandardValidator } from "typebox-validators";
 
 import type {
   SuperValidateOptions,
   SuperValidateResult,
 } from "./public-types.js";
-import { evaluateSync } from "./evaluate-sync.js";
-import { getSchemaInfo, type SchemaInfo } from "./schema-info.js";
+import { evaluateData } from "./evaluate-data.js";
 import type { ParsedData } from "./internal-types.js";
-import { parseFormData } from "./parse-form-data.js";
 
 export async function evaluateAsync<T extends TObject, M = any>(
   data: Request | Partial<Static<T>> | undefined,
@@ -28,16 +27,18 @@ export async function evaluateAsync<T extends TObject, M = any>(
   //   data = null;
   // }
 
-  const schemaInfo = getSchemaInfo(validator.schema);
+  const schemaInfo = getSchemaInfo(validator.schema as TObject<any>);
   let parsedData: ParsedData<T>;
   options ||= {};
 
   if (data instanceof FormData) {
-    parsedData = parseFormData(data, schemaInfo, options);
-  } else if (data instanceof URL || data instanceof URLSearchParams) {
-    parsedData = parseSearchParams(data, schemaInfo, options);
+    parsedData = parseFormFields(data, schemaInfo);
+  } else if (data instanceof URL) {
+    parsedData = parseFormFields(data.searchParams, schemaInfo);
+  } else if (data instanceof URLSearchParams) {
+    parsedData = parseFormFields(data, schemaInfo);
   } else if (data instanceof Request) {
-    parsedData = await tryParseFormData(data, schemaInfo, options);
+    parsedData = await tryParseFormData(data, schemaInfo);
     // } else if (
     //   data &&
     //   typeof data === 'object' &&
@@ -53,12 +54,12 @@ export async function evaluateAsync<T extends TObject, M = any>(
     };
   }
 
-  // TODO: reconcile this with call to evaluateSync.
+  // TODO: reconcile this with call to evaluateData.
 
   const toValidate = dataToValidate(parsedData, schemaInfo, options);
   const result =
     toValidate !== undefined
-      ? evaluateSync(toValidate, validator, options, evaluateData)
+      ? evaluateData(toValidate, validator, options, evaluateData)
       : undefined;
 
   return validateResult<UnwrapEffects<T>, M>(parsedData, schemaInfo, result);
@@ -84,8 +85,7 @@ function dataToValidate<T extends TObject>(
 
 async function tryParseFormData<T extends TObject>(
   request: Request,
-  schemaInfo: SchemaInfo<T>,
-  options: SuperValidateOptions
+  schemaInfo: SchemaInfo<T>
 ) {
   let formData: FormData | undefined = undefined;
   try {
@@ -99,23 +99,5 @@ async function tryParseFormData<T extends TObject>(
     // No data found, return an empty form
     return { id: undefined, data: undefined, posted: false };
   }
-  return parseFormData(formData, schemaInfo, options);
-}
-
-function parseSearchParams<T extends TObject>(
-  data: URL | URLSearchParams,
-  schemaInfo: SchemaInfo<T>,
-  options: SuperValidateOptions
-): ParsedData<T> {
-  if (data instanceof URL) data = data.searchParams;
-
-  const convert = new FormData();
-  for (const [key, value] of data.entries()) {
-    convert.append(key, value);
-  }
-
-  // Only FormData can be posted.
-  const output = parseFormData(convert, schemaInfo, options);
-  output.posted = false;
-  return output;
+  return parseFormFields(formData, schemaInfo);
 }

@@ -1,11 +1,11 @@
 {
-  "name": "typebox-for-superforms",
+  "name": "typebox-superforms-client",
   "version": "0.0.1",
-  "description": "SvelteKit superforms using TypeBox schemas, hitting API endpoints",
+  "description": "Client for using SvelteKit superforms with TypeBox schemas, hitting API endpoints",
   "author": "Joseph T. Lapp <arachnojoe@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jtlapp/typebox-for-superforms"
+    "url": "https://github.com/jtlapp/typebox-superforms-client"
   },
   "keywords": [
     "typebox",
@@ -45,14 +45,14 @@
     "!dist/**/*.spec.*"
   ],
   "peerDependencies": {
-    "@sinclair/typebox": "^0.30.2",
+    "@sinclair/typebox": "^0.30.4",
     "svelte": "^4.0.0",
     "sveltekit-superforms": "^1.5.0",
-    "typebox-validators": "0.3.2"
+    "typebox-validators": "0.3.3"
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",
-    "@sinclair/typebox": "^0.30.2",
+    "@sinclair/typebox": "^0.30.4",
     "@sveltejs/adapter-auto": "^2.0.0",
     "@sveltejs/kit": "^1.20.4",
     "@sveltejs/package": "^2.0.0",
@@ -75,6 +75,6 @@
     "zod": "^3.21.4"
   },
   "dependencies": {
-    "devalue": "^4.3.2"
+    "typebox-form-parser": "^0.1.1"
   }
 }
